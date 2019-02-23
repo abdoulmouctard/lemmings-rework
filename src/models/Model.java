@@ -2,15 +2,13 @@ package models;
 
 import models.lemming.Lemming;
 import models.map.Board;
-import views.View;
-
 import java.util.ArrayList;
 import java.util.List;
 
-public class Model implements Observer<View>
+public class Model
 {
-    private static final int BOARD_HEIGHT = 10;
-    private static final int BOARD_WIDTH = 10;
+    public static final int BOARD_HEIGHT = 50;
+    public static final int BOARD_WIDTH = 50;
     private static final int NUMBER_OF_LEMMINGS = 7;
 
     private static Model instance = null;
@@ -22,18 +20,16 @@ public class Model implements Observer<View>
         this.board = new Board(Model.BOARD_WIDTH, Model.BOARD_HEIGHT);
 
         this.lemmings = new ArrayList<>();
-        for (int i = 0; i < Model.NUMBER_OF_LEMMINGS; i++)
-            lemmings.add(new Lemming(this.board.getEntryBlock()));
+        for (int i = 0; i < Model.NUMBER_OF_LEMMINGS; i++) {
+            lemmings.add(new Lemming( this.board.getBlock( (i+3)*3, i * 5) ));
+        }
 
+        this.board.setLemmings(this.lemmings);
     }
 
-    public List<? extends Lemming> getLemmings() { return this.lemmings; }
+    public List<Lemming> getLemmings() { return this.lemmings; }
 
-    @Override
-    public void update(Observable<View> observable)
-    {
 
-    }
 
 
     public Board getBoard() { return board; }
@@ -45,9 +41,9 @@ public class Model implements Observer<View>
     public static Model getInstance()
     {
         if (instance != null) return instance;
-
-        Model.instance = new Model();
-
+        boot();
         return instance;
     }
+
+    public static void boot() { Model.instance = new Model(); }
 }

@@ -1,4 +1,4 @@
 package models;
 
 @FunctionalInterface
-public interface Creator<T> { public T init(); }
+public interface Creator<T> { T init(); }

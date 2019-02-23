@@ -1,27 +1,33 @@
 package models.lemming;
 
-import models.map.Block;
+import controllers.Constants;
 import models.map.BoardContainer;
 import models.map.Location;
 import views.Printable;
 
 import java.awt.*;
 
+import static models.map.Block.WIDTH_SCALE;
+import static models.map.Block.HEIGHT_SCALE;
+
 public class Lemming implements Printable
 {
+    private Color color;
     private State state;
     private Location location;
     private Direction direction;
-    private int life = 1;
+    private boolean live;
 
     public Lemming(BoardContainer container)
     {
         this.state = new WalkerState();
         this.location = container.getLocation();
         this.direction = Direction.LEFT;
+        this.live = true;
+        this.color = Constants.COLOR_PURPLE;
     }
 
-    public boolean live() { return this.life > 0; }
+    public boolean isLive() { return this.live; }
 
     public void step() { this.state.action(); }
 
@@ -33,9 +39,12 @@ public class Lemming implements Printable
     public Direction getDirection() { return direction; }
 
     @Override
-    public void print(Graphics graphics)
+    public void print(Graphics graphics, Location location)
     {
-
+        graphics.setColor(this.color);
+        int x = location.getX();
+        int y = location.getY();
+        graphics.fillOval(x, y, x + WIDTH_SCALE/2 - 5, y + HEIGHT_SCALE);
     }
 
 
@@ -49,8 +58,11 @@ public class Lemming implements Printable
 
     public boolean falling() { return false; }
 
-    public void updateState()
+    public void updateState() { this.state = new WalkerState(); }
+
+    @Override
+    public String toString()
     {
-        this.state = new WalkerState();
+        return "Lemming: DIRECTION" + this.direction +" | " + this.location;
     }
 }

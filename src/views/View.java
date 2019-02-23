@@ -36,7 +36,8 @@ public class View implements Observable<View>
     @Override
     public void notifyObservers() {}
 
-    public void update() {
+    public void update()
+    {
         this.window.repaint();
         this.boardPanel.repaint();
         this.menuPanel.repaint();

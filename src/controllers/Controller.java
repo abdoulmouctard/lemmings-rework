@@ -4,40 +4,38 @@ import models.lemming.Lemming;
 import models.Model;
 import models.Observable;
 import models.Observer;
+import models.map.Block;
 import views.View;
 
 public class Controller implements Observer<View>
 {
     private boolean stop;
-    private Model model;
     static final long REFRESH_TIMER = 200;
 
-    public static Lemming currentLemming = null;
+    private static Block currentBlock = null;
 
-    Controller(Model model)
-    {
-        this.model = model;
-        this.stop = false;
-    }
+    Controller() { this.stop = false; }
 
     boolean inprogress()
     {
-        if (!stop) return false;
-
-        return this.model.getLemmings().stream().anyMatch(Lemming::live);
+        if (stop) return false;
+        return Model.getInstance().getLemmings().stream().anyMatch(Lemming::isLive);
     }
 
     void step()
     {
-        this.model.getLemmings()
+        Model.getInstance().getLemmings()
             .stream()
-            .filter(Lemming::live)
+            .filter(Lemming::isLive)
             .forEach(Lemming::step);
     }
+
+    public static void setCurrentBlock(Block currentBlock) { Controller.currentBlock = currentBlock; }
+
+    public static Block getCurrentBlock() { return currentBlock; }
 
     @Override
     public void update(Observable<View> observable)
     {
-
     }
 }

@@ -1,18 +1,16 @@
 package models.map;
 
-import org.jetbrains.annotations.NotNull;
-
-public class BlockFactory
+class BlockFactory
 {
     private BlockFactory(){}
 
-    public static Block make(@NotNull String name)
+    static Block make(String name, int i, int j)
     {
         name = name.toLowerCase();
 
-        if (name.contains("fire")) return new FireBlock();
-        if (name.contains("indestructible")) return new IndestructibleBlock();
+        if (name.contains("fire")) return new FireBlock(i,j);
+        if (name.contains("indestructible")) return new IndestructibleBlock(i,j);
 
-        return new DestructibleBlock();
+        return new DestructibleBlock(i,j);
     }
 }

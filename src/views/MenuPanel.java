@@ -10,26 +10,25 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-public class MenuPanel extends JPanel
+class MenuPanel extends JPanel
 {
     private List<JButton> buttons;
-    private JButton play_and_pause;
 
-    private static final int FULL_SIZE = Constants.WINDOW_WIDTH/5;
+    private static final int FULL_SIZE = Window.WIDTH/5;
 
-    public MenuPanel()
+    MenuPanel()
     {
-        this.setLocation(Constants.WINDOW_WIDTH-Constants.WINDOW_WIDTH/5, 0);
-        this.setSize(FULL_SIZE, Constants.WINDOW_HEIGHT);
+        this.setLocation(Window.WIDTH-Window.WIDTH/5, 0);
+        this.setSize(FULL_SIZE, Window.HEIGHT);
         this.setBackground(Constants.COLOR_WHITE);
 
-        this.play_and_pause = new JButton("PLAY");
-        this.play_and_pause.setSize(FULL_SIZE,50);
-        this.play_and_pause.setBackground(Constants.COLOR_RED);
-        this.play_and_pause.setLocation(0, 0);
-        this.play_and_pause.setFocusable(false);
-        this.play_and_pause.setBorderPainted(false);
-        this.add(this.play_and_pause);
+        JButton play_and_pause = new JButton("PLAY");
+        play_and_pause.setSize(FULL_SIZE,50);
+        play_and_pause.setBackground(Constants.COLOR_RED);
+        play_and_pause.setLocation(0, 0);
+        play_and_pause.setFocusable(false);
+        play_and_pause.setBorderPainted(false);
+        this.add(play_and_pause);
 
 
         this.buttons = new ArrayList<>();

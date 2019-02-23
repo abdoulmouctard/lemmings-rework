@@ -1,8 +1,10 @@
 package views;
 
+import models.map.Location;
+
 import java.awt.*;
 
 public interface Printable
 {
-    public void print(Graphics graphics);
+    void print(Graphics graphics, Location location);
 }

@@ -14,6 +14,7 @@ public class StateFactory
         if (name.contains("borer")) return new BorerState();
         if (name.contains("climber")) return new ClimberState();
         if (name.contains("furrier")) return new FurrierState();
+        if (name.contains("carpenter")) return new CarpenterState();
         if (name.contains("parachutist")) return new ParachutistState();
 
         return new WalkerState();

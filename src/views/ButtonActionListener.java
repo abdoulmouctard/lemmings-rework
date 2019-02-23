@@ -2,7 +2,7 @@ package views;
 
 import controllers.Controller;
 import models.StateFactory;
-import models.lemming.State;
+import models.map.Block;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -16,9 +16,9 @@ class ButtonActionListener implements ActionListener
     @Override
     public void actionPerformed(ActionEvent actionEvent)
     {
-        if (Controller.currentLemming != null)
-            Controller.currentLemming.setState(StateFactory.make(this.actionName));
+        Block block =Controller.getCurrentBlock();
 
-        System.out.println(this.actionName);
+        if (block != null && block.getLemming() != null)
+            block.getLemming().setState(StateFactory.make(this.actionName));
     }
 }

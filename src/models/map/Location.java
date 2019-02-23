@@ -30,4 +30,7 @@ public class Location
         Location location = (Location) object;
         return this.x == location.x && this.y == location.y;
     }
+
+    @Override
+    public String toString() { return "Location: (x,y) => ("+ this.x +","+this.y+")"; }
 }
